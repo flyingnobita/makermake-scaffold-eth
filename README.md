@@ -1,3 +1,29 @@
+# Keep Repo In Sync w/ Upstream
+
+## Keep Upstream in sync
+
+```shell
+git fetch upstream
+```
+
+## Keep dev branch in sync w/ upstream
+
+```shell
+git checkout dev
+git pull --rebase upstream dev
+git push
+```
+
+## Keep master branch in sync w/ upstream
+
+```shell
+git checkout master
+git pull --rebase upstream master
+git push
+```
+
+*Ref: <https://garrytrinder.github.io/2020/03/keeping-your-fork-up-to-date>*
+
 # 🏗 scaffold-eth
 
 > is everything you need to get started building decentralized applications powered by smart contracts
