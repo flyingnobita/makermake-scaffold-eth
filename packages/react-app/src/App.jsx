@@ -14,6 +14,17 @@ import { formatEther, parseEther } from "@ethersproject/units";
 //import Hints from "./Hints";
 import { Hints, ExampleUI, Subgraph } from "./views"
 import { INFURA_ID, DAI_ADDRESS, DAI_ABI, NETWORK, NETWORKS } from "./constants";
+import {
+  AaveProtocolDataProvider_ADDRESS,
+  AaveProtocolDataProvider_ABI,
+  AaveLendingPool_ADDRESS,
+  AaveLendingPool_ABI,
+  AaveOracle_ADDRESS,
+  AaveOracle_ABI,
+  AaveLendingPoolAddressesProvider_ADDRESS,
+  AaveLendingPoolAddressesProvider_ABI
+} from "./components/aave/abi";
+
 /*
     Welcome to 🏗 scaffold-eth !
 
@@ -111,6 +122,68 @@ function App(props) {
   console.log("🥇 myMainnetDAIBalance:",myMainnetDAIBalance)
 
 
+  const aaveProtocolDataProviderContract = useExternalContractLoader(
+    mainnetProvider,
+    AaveProtocolDataProvider_ADDRESS,
+    AaveProtocolDataProvider_ABI,
+  );
+
+  const aaveLendingPoolContract = useExternalContractLoader(
+    mainnetProvider,
+    AaveLendingPool_ADDRESS,
+    AaveLendingPool_ABI,
+  );
+
+  const aaveOracleContract = useExternalContractLoader(
+    mainnetProvider,
+    AaveOracle_ADDRESS,
+    AaveOracle_ABI,
+  );
+
+  const aaveLendingPoolAddressesProviderContract = useExternalContractLoader(
+    mainnetProvider,
+    AaveLendingPoolAddressesProvider_ADDRESS,
+    AaveLendingPoolAddressesProvider_ABI,
+  );
+
+  ////////////////////////////////////////////////////
+  // using useContractReader()
+  ////////////////////////////////////////////////////
+  // const allTokens = useContractReader(
+  //   { protocolDataProvider: aaveProtocolDataProviderContract },
+  //   "protocolDataProvider",
+  //   "getAllATokens",
+  //   100000,
+  // );
+  // console.log("allTokens", allTokens);
+
+  // const reservesList = useContractReader(
+  //   { protocolDataProvider: aaveLendingPoolContract },
+  //   "protocolDataProvider",
+  //   "getReservesList",
+  //   100000,
+  // );
+  // console.log("reservesList", reservesList);
+
+  ////////////////////////////////////////////////////
+  // using ethers.js directly
+  ////////////////////////////////////////////////////
+  // async function getAllATokens() {
+  //   if (aaveProtocolDataProviderContract) {
+  //     const allATokens = await aaveProtocolDataProviderContract.getAllATokens();
+  //     console.log("allATokens", allATokens);
+  //   }
+  // }
+  // getAllATokens();
+
+  // async function getReservesList() {
+  //   if (aaveLendingPoolContract) {
+  //     const reservesList = await aaveLendingPoolContract.getReservesList();
+  //     console.log("reservesList", reservesList);
+  //   }
+  // }
+  // getReservesList();
+
   // keep track of a variable from the contract in the local React state:
   const purpose = useContractReader(readContracts,"YourContract", "purpose")
   console.log("🤗 purpose:",purpose)
@@ -195,6 +268,9 @@ function App(props) {
           <Menu.Item key="/">
             <Link onClick={()=>{setRoute("/")}} to="/">YourContract</Link>
           </Menu.Item>
+          <Menu.Item key="/aave">
+            <Link onClick={()=>{setRoute("/aave")}} to="/aave">Aave</Link>
+          </Menu.Item>
           <Menu.Item key="/hints">
             <Link onClick={()=>{setRoute("/hints")}} to="/hints">Hints</Link>
           </Menu.Item>
@@ -246,6 +322,40 @@ function App(props) {
               blockExplorer={blockExplorer}
             />
             */ }
+          </Route>
+          <Route path="/aave">
+            <Contract
+                name="aaveLendingPoolContract"
+                customContract={aaveLendingPoolContract}
+                signer={userProvider.getSigner()}
+                provider={mainnetProvider}
+                address={address}
+                blockExplorer={blockExplorer}
+              />
+            <Contract
+                name="aaveProtocolDataProviderContract"
+                customContract={aaveProtocolDataProviderContract}
+                signer={userProvider.getSigner()}
+                provider={mainnetProvider}
+                address={address}
+                blockExplorer={blockExplorer}
+            />
+            <Contract
+                name="aaveOracleContract"
+                customContract={aaveOracleContract}
+                signer={userProvider.getSigner()}
+                provider={mainnetProvider}
+                address={address}
+                blockExplorer={blockExplorer}
+            />
+            <Contract
+                name="aaveLendingPoolAddressesProviderContract"
+                customContract={aaveLendingPoolAddressesProviderContract}
+                signer={userProvider.getSigner()}
+                provider={mainnetProvider}
+                address={address}
+                blockExplorer={blockExplorer}
+            />
           </Route>
           <Route path="/hints">
             <Hints
