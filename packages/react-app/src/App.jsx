@@ -17,7 +17,7 @@ import { INFURA_ID, DAI_ADDRESS, DAI_ABI, NETWORK, NETWORKS } from "./constants"
 import {
   AaveProtocolDataProvider_ADDRESS,
   AaveProtocolDataProvider_ABI,
-  AaveLendingPool_ADDRESS,
+  AaveLendingPool_KOVAN_ADDRESS,
   AaveLendingPool_ABI,
   AaveOracle_ADDRESS,
   AaveOracle_ABI,
@@ -45,7 +45,7 @@ import {
 */
 
 /// 📡 What chain are your contracts deployed to?
-const targetNetwork = NETWORKS['localhost']; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const targetNetwork = NETWORKS['kovan']; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true
@@ -130,7 +130,7 @@ function App(props) {
 
   const aaveLendingPoolContract = useExternalContractLoader(
     mainnetProvider,
-    AaveLendingPool_ADDRESS,
+    AaveLendingPool_KOVAN_ADDRESS,
     AaveLendingPool_ABI,
   );
 
@@ -185,12 +185,12 @@ function App(props) {
   // getReservesList();
 
   // keep track of a variable from the contract in the local React state:
-  const purpose = useContractReader(readContracts,"YourContract", "purpose")
-  console.log("🤗 purpose:",purpose)
+  // const purpose = useContractReader(readContracts,"YourContract", "purpose")
+  // console.log("🤗 purpose:",purpose)
 
   //📟 Listen for broadcast events
-  const setPurposeEvents = useEventListener(readContracts, "YourContract", "SetPurpose", localProvider, 1);
-  console.log("📟 SetPurpose events:",setPurposeEvents)
+  // const setPurposeEvents = useEventListener(readContracts, "YourContract", "SetPurpose", localProvider, 1);
+  // console.log("📟 SetPurpose events:",setPurposeEvents)
 
   /*
   const addressFromENS = useResolveName(mainnetProvider, "austingriffith.eth");
@@ -293,13 +293,13 @@ function App(props) {
                 and give you a form to interact with it locally
             */}
 
-            <Contract
+            {/* <Contract
               name="YourContract"
               signer={userProvider.getSigner()}
               provider={localProvider}
               address={address}
               blockExplorer={blockExplorer}
-            />
+            /> */}
 
 
             { /* uncomment for a second contract:
@@ -366,7 +366,7 @@ function App(props) {
             />
           </Route>
           <Route path="/exampleui">
-            <ExampleUI
+            {/* <ExampleUI
               address={address}
               userProvider={userProvider}
               mainnetProvider={mainnetProvider}
@@ -378,7 +378,7 @@ function App(props) {
               readContracts={readContracts}
               purpose={purpose}
               setPurposeEvents={setPurposeEvents}
-            />
+            /> */}
           </Route>
           <Route path="/mainnetdai">
             <Contract

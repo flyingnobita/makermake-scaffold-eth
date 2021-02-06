@@ -18,7 +18,7 @@ const { isAddress, getAddress, formatUnits, parseUnits } = utils;
 //
 // Select the network you want to deploy to here:
 //
-const defaultNetwork = "localhost";
+const defaultNetwork = "kovan";
 
 function mnemonic() {
   try {
@@ -40,12 +40,12 @@ module.exports = {
   // (you will need to restart the `yarn run start` dev server after editing the .env)
 
   networks: {
-    hardhat: {
-      forking: {
-        url: "https://eth-mainnet.alchemyapi.io/v2/0RFoxWknXL3bTVDczMFoHH1wCu5NjikR",
-        blockNumber: 11789288
-      }
-    },
+    // hardhat: {
+    //   forking: {
+    //     url: "https://eth-mainnet.alchemyapi.io/v2/0RFoxWknXL3bTVDczMFoHH1wCu5NjikR",
+    //     blockNumber: 11789288
+    //   }
+    // },
     localhost: {
       url: "http://localhost:8545",
       /*
