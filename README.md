@@ -1,23 +1,17 @@
 # Keep Repo In Sync w/ Upstream
 
-## Keep Upstream in sync
+**Upstream - [austintgriffith/scaffold-eth](https://github.com/austintgriffith/scaffold-eth)**
+
+## Keep in sync with Upstream
 
 ```shell
 git fetch upstream
 ```
 
-## Keep dev branch in sync w/ upstream master
+## Keep dev branch in sync w/ Upstream master
 
 ```shell
 git checkout dev
-git pull --rebase upstream master
-git push
-```
-
-## Keep master branch in sync w/ upstream
-
-```shell
-git checkout master
 git pull --rebase upstream master
 git push
 ```
