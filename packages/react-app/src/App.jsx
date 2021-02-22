@@ -184,6 +184,68 @@ function App(props) {
   // }
   // getReservesList();
 
+  const aaveProtocolDataProviderContract = useExternalContractLoader(
+    mainnetProvider,
+    AaveProtocolDataProvider_ADDRESS,
+    AaveProtocolDataProvider_ABI,
+  );
+
+  const aaveLendingPoolContract = useExternalContractLoader(
+    mainnetProvider,
+    AaveLendingPool_KOVAN_ADDRESS,
+    AaveLendingPool_ABI,
+  );
+
+  const aaveOracleContract = useExternalContractLoader(
+    mainnetProvider,
+    AaveOracle_ADDRESS,
+    AaveOracle_ABI,
+  );
+
+  const aaveLendingPoolAddressesProviderContract = useExternalContractLoader(
+    mainnetProvider,
+    AaveLendingPoolAddressesProvider_ADDRESS,
+    AaveLendingPoolAddressesProvider_ABI,
+  );
+
+  ////////////////////////////////////////////////////
+  // using useContractReader()
+  ////////////////////////////////////////////////////
+  // const allTokens = useContractReader(
+  //   { protocolDataProvider: aaveProtocolDataProviderContract },
+  //   "protocolDataProvider",
+  //   "getAllATokens",
+  //   100000,
+  // );
+  // console.log("allTokens", allTokens);
+
+  // const reservesList = useContractReader(
+  //   { protocolDataProvider: aaveLendingPoolContract },
+  //   "protocolDataProvider",
+  //   "getReservesList",
+  //   100000,
+  // );
+  // console.log("reservesList", reservesList);
+
+  ////////////////////////////////////////////////////
+  // using ethers.js directly
+  ////////////////////////////////////////////////////
+  // async function getAllATokens() {
+  //   if (aaveProtocolDataProviderContract) {
+  //     const allATokens = await aaveProtocolDataProviderContract.getAllATokens();
+  //     console.log("allATokens", allATokens);
+  //   }
+  // }
+  // getAllATokens();
+
+  // async function getReservesList() {
+  //   if (aaveLendingPoolContract) {
+  //     const reservesList = await aaveLendingPoolContract.getReservesList();
+  //     console.log("reservesList", reservesList);
+  //   }
+  // }
+  // getReservesList();
+
   // keep track of a variable from the contract in the local React state:
   // const purpose = useContractReader(readContracts,"YourContract", "purpose")
   // console.log("🤗 purpose:",purpose)
@@ -379,16 +441,6 @@ function App(props) {
               purpose={purpose}
               setPurposeEvents={setPurposeEvents}
             /> */}
-          </Route>
-          <Route path="/mainnetdai">
-            <Contract
-              name="DAI"
-              customContract={mainnetDAIContract}
-              signer={userProvider.getSigner()}
-              provider={mainnetProvider}
-              address={address}
-              blockExplorer={"https://etherscan.io/"}
-            />
           </Route>
           <Route path="/subgraph">
             <Subgraph
