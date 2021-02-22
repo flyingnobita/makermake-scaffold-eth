@@ -6,11 +6,11 @@
 git fetch upstream
 ```
 
-## Keep dev branch in sync w/ upstream
+## Keep dev branch in sync w/ upstream master
 
 ```shell
 git checkout dev
-git pull --rebase upstream dev
+git pull --rebase upstream master
 git push
 ```
 
